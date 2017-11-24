@@ -12,9 +12,8 @@ public class InputManager : MonoBehaviour {
     }
 
     //String to controller axis
-    private Dictionary<string, XboxCtrlrInput.XboxAxis> m_stringToAxis = new Dictionary<string, XboxCtrlrInput.XboxAxis>();
-
-    private Dictionary<string, XboxCtrlrInput.XboxButton> m_stringToButton = new Dictionary<string, XboxCtrlrInput.XboxButton>();
+    private Dictionary<string, XboxCtrlrInput.XboxAxis> m_stringToAxisController = new Dictionary<string, XboxCtrlrInput.XboxAxis>();
+    private Dictionary<string, XboxCtrlrInput.XboxButton> m_stringToButtonController = new Dictionary<string, XboxCtrlrInput.XboxButton>();
 
     private INPUT_STATE m_inputState = INPUT_STATE.KEYBOARD;
 
@@ -25,16 +24,15 @@ public class InputManager : MonoBehaviour {
             m_inputState = INPUT_STATE.CONTROLLER; //Controller is detected
 
         //Set up dictionaries
-        //Keyboard TODO
 
         //Xbox Controls
         //Axis
-        m_stringToAxis.Add("Horizontal", XboxCtrlrInput.XboxAxis.LeftStickX);
-        m_stringToAxis.Add("Vertical", XboxCtrlrInput.XboxAxis.LeftStickY);
+        m_stringToAxisController.Add("Horizontal", XboxCtrlrInput.XboxAxis.LeftStickX);
+        m_stringToAxisController.Add("Vertical", XboxCtrlrInput.XboxAxis.LeftStickY);
         //Buttons
-        m_stringToButton.Add("Jump", XboxCtrlrInput.XboxButton.A);
-        m_stringToButton.Add("Sprint", XboxCtrlrInput.XboxButton.B);
-        m_stringToButton.Add("Attack", XboxCtrlrInput.XboxButton.X);
+        m_stringToButtonController.Add("Jump", XboxCtrlrInput.XboxButton.A);
+        m_stringToButtonController.Add("Sprint", XboxCtrlrInput.XboxButton.B);
+        m_stringToButtonController.Add("Attack", XboxCtrlrInput.XboxButton.X);
     }
 
     public float GetRawAxis(string axisName)
@@ -42,7 +40,7 @@ public class InputManager : MonoBehaviour {
         if (m_inputState == INPUT_STATE.KEYBOARD)
             return Input.GetAxisRaw(axisName);
         else
-            return XboxCtrlrInput.XCI.GetAxisRaw(m_stringToAxis[axisName]);
+            return XboxCtrlrInput.XCI.GetAxisRaw(m_stringToAxisController[axisName]);
     }
 
     public bool GetButton(string buttonName)
@@ -50,6 +48,6 @@ public class InputManager : MonoBehaviour {
         if (m_inputState == INPUT_STATE.KEYBOARD)
             return Input.GetButton(buttonName);
         else
-            return XboxCtrlrInput.XCI.GetButton(m_stringToButton[buttonName]);
+            return XboxCtrlrInput.XCI.GetButton(m_stringToButtonController[buttonName]);
     }
 }
