@@ -36,8 +36,8 @@ public class PlayerMovement : MonoBehaviour {
     {
         //Movement
         Vector3 currentVelocity = m_rbPlayer.velocity;
-        currentVelocity.x = (m_inputManager.GetRawAxis("Horizontal") * m_forwardsVelocity);
-        if(IsGrounded() && m_inputManager.GetButton("Jump"))
+        currentVelocity.x = (m_inputManager.GetInputFloat("Horizontal") * m_forwardsVelocity);
+        if(IsGrounded() && m_inputManager.GetInputBool("Jump"))
             currentVelocity.y = m_jumpVelocity;
         m_rbPlayer.velocity = currentVelocity;
 

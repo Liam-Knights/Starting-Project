@@ -12,8 +12,8 @@ public class InputManager : MonoBehaviour {
     }
 
     //String to controller axis
-    private Dictionary<string, XboxCtrlrInput.XboxAxis> m_stringToAxisController = new Dictionary<string, XboxCtrlrInput.XboxAxis>();
-    private Dictionary<string, XboxCtrlrInput.XboxButton> m_stringToButtonController = new Dictionary<string, XboxCtrlrInput.XboxButton>();
+    private Dictionary<string, XboxCtrlrInput.XboxAxis> m_stringToFloat = new Dictionary<string, XboxCtrlrInput.XboxAxis>();
+    private Dictionary<string, XboxCtrlrInput.XboxButton> m_stringToBool = new Dictionary<string, XboxCtrlrInput.XboxButton>();
 
     private INPUT_STATE m_inputState = INPUT_STATE.KEYBOARD;
 
@@ -27,27 +27,43 @@ public class InputManager : MonoBehaviour {
 
         //Xbox Controls
         //Axis
-        m_stringToAxisController.Add("Horizontal", XboxCtrlrInput.XboxAxis.LeftStickX);
-        m_stringToAxisController.Add("Vertical", XboxCtrlrInput.XboxAxis.LeftStickY);
+        m_stringToFloat.Add("Horizontal", XboxCtrlrInput.XboxAxis.LeftStickX);
+        m_stringToFloat.Add("Vertical", XboxCtrlrInput.XboxAxis.LeftStickY);
+        m_stringToFloat.Add("HeavyAttack", XboxCtrlrInput.XboxAxis.RightTrigger);
         //Buttons
-        m_stringToButtonController.Add("Jump", XboxCtrlrInput.XboxButton.A);
-        m_stringToButtonController.Add("Sprint", XboxCtrlrInput.XboxButton.B);
-        m_stringToButtonController.Add("Attack", XboxCtrlrInput.XboxButton.X);
+        m_stringToBool.Add("Jump", XboxCtrlrInput.XboxButton.A);
+        m_stringToBool.Add("Sprint", XboxCtrlrInput.XboxButton.B);
+        m_stringToBool.Add("LightAttack", XboxCtrlrInput.XboxButton.RightBumper);
     }
 
-    public float GetRawAxis(string axisName)
+    public float GetInputFloat(string inputName)
     {
         if (m_inputState == INPUT_STATE.KEYBOARD)
-            return Input.GetAxisRaw(axisName);
+            return Input.GetAxis(inputName);
         else
-            return XboxCtrlrInput.XCI.GetAxisRaw(m_stringToAxisController[axisName]);
+            return XboxCtrlrInput.XCI.GetAxis(m_stringToFloat[inputName]);
     }
 
-    public bool GetButton(string buttonName)
+    public bool GetInputBool(string inputName)
     {
         if (m_inputState == INPUT_STATE.KEYBOARD)
-            return Input.GetButton(buttonName);
+            return Input.GetButton(inputName);
         else
-            return XboxCtrlrInput.XCI.GetButton(m_stringToButtonController[buttonName]);
+        {
+            switch (inputName)
+            {
+                case "Jump":
+                case "Sprint":
+                case "LightAttack":
+                    return XboxCtrlrInput.XCI.GetButton(m_stringToBool[inputName]);
+
+                case "HeavyAttack": // Trigger float to bool
+                    if (XboxCtrlrInput.XCI.GetAxisRaw(m_stringToFloat[inputName]) > 0)
+                        return true;
+                    return false;
+            }
+        }
+
+        return false;
     }
 }

@@ -16,9 +16,14 @@ public class PlayerWeapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		if(m_inputManager.GetButton("Attack"))
-            m_weapon.GetComponent<Animator>().SetBool("Attack", true);
+		if(m_inputManager.GetInputBool("LightAttack"))
+            m_weapon.GetComponent<Animator>().SetBool("LightAttack", true);
         else
-            m_weapon.GetComponent<Animator>().SetBool("Attack", false);
+            m_weapon.GetComponent<Animator>().SetBool("LightAttack", false);
+
+        if (m_inputManager.GetInputBool("HeavyAttack"))
+            m_weapon.GetComponent<Animator>().SetBool("HeavyAttack", true);
+        else
+            m_weapon.GetComponent<Animator>().SetBool("HeavyAttack", false);
     }
 }
