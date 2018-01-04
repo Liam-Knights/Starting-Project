@@ -36,10 +36,13 @@ public class Character : MonoBehaviour {
 
         if (m_healthBar != null)
         {
-            Vector3 healthBarScale = m_healthBar.transform.localScale;
-            healthBarScale.x = m_health / m_healthMax;
+            if(!IsDead())
+            {
+                Vector3 healthBarScale = m_healthBar.transform.localScale;
+                healthBarScale.x = m_health / m_healthMax;
 
-            m_healthBar.transform.localScale = healthBarScale;
+                m_healthBar.transform.localScale = healthBarScale;
+            }
         }
     }
 }

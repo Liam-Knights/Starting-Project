@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Player : Character
 {
-    [SerializeField] public InputManager m_InputManager = null;
+    public GameObject m_playerModel = null;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
 		
 	}
@@ -16,7 +16,5 @@ public class Player : Character
 	new void Update ()
     {
         base.Update();
-
-
     }
 }
