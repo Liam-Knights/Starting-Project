@@ -111,7 +111,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            return (new Vector3(GetInputFloat("AimingHorizontal"), GetInputFloat("AimingVertical"), 0.0f)); 
+            return (new Vector3(GetInputFloat("AimingHorizontal"), GetInputFloat("AimingVertical"), 0.0f).normalized); 
         }
     }
 }

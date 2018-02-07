@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Melee : MonoBehaviour
+public class Melee : BaseWeapon
 {
     [SerializeField] private float m_baseDamage = 1;
     [SerializeField] private float m_heavyDamageIncrease = 1.2f;
@@ -11,30 +11,7 @@ public class Melee : MonoBehaviour
 
     private bool m_doingDamage = false;
 
-    private List<GameObject> m_hitCharacters;
-
-    private Animator m_animator = null;
-
-	// Use this for initialization
-	void Start ()
-    {
-        m_hitCharacters = new List<GameObject>();
-        m_animator = GetComponent<Animator>();
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (InputManager.m_instance.GetInputBool("LightAttack"))
-            m_animator.SetBool("LightAttack", true);
-        else
-            m_animator.SetBool("LightAttack", false);
-
-        if (InputManager.m_instance.GetInputBool("HeavyAttack"))
-            m_animator.SetBool("HeavyAttack", true);
-        else
-            m_animator.SetBool("HeavyAttack", false);
-    }
+	private List<GameObject> m_hitCharacters = new List<GameObject>();
 
     private void OnTriggerEnter(Collider other)
     {

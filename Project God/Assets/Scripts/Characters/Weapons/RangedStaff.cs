@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedStaff : MonoBehaviour {
+public class RangedStaff : BaseWeapon {
 
     [SerializeField] private GameObject m_projectile = null;
     [SerializeField] private float m_damage = 0.0f;
@@ -10,26 +10,17 @@ public class RangedStaff : MonoBehaviour {
 
     public float m_projectleSpeed = 1.0f;
 
-    private Animator m_animator = null;
+    private Character m_character = null;
 
-    // Use this for initialization
-    void Start ()
+    private void Start()
     {
-        m_animator = GetComponent<Animator>();
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (InputManager.m_instance.GetInputBool("LightAttack") || InputManager.m_instance.GetInputBool("HeavyAttack"))
-            m_animator.SetBool("FireStaff", true);
-        else
-            m_animator.SetBool("FireStaff", false);
+        m_character = m_parent.GetComponent<Character>();
     }
 
     public void RangedAttack()
     {
-        Vector3 fireDir = InputManager.m_instance.GetAimingDirection(transform.TransformPoint(m_projectileSpawnPos));
+        //TODO make this look nicer
+        Vector3 fireDir = m_character.GetAimingDir(m_projectileSpawnPos);
         GameObject newProjectile = Instantiate(m_projectile, transform.TransformPoint(m_projectileSpawnPos), Quaternion.identity);
         newProjectile.tag = transform.parent.tag;
         newProjectile.GetComponent<Projectile>().SetDamage(m_damage);

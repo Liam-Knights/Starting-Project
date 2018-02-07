@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 65528077378880622}
   - component: {fileID: 23211891035186900}
   - component: {fileID: 95290791576696580}
-  - component: {fileID: 114434537940068516}
+  - component: {fileID: 114038451485834832}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -82,6 +82,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -97,6 +98,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -133,7 +135,7 @@ Animator:
   m_GameObject: {fileID: 1846317319604074}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 229377ed1ae5fed4ba3aa5fc2369e554, type: 2}
+  m_Controller: {fileID: 9100000, guid: 116818ed1c76640be9ab81ddfcd5b328, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -141,7 +143,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114434537940068516
+--- !u!114 &114038451485834832
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -149,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1846317319604074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4384cb6131c385a4eb29819040294fad, type: 3}
+  m_Script: {fileID: 11500000, guid: e7c135b881fc14fbab7c0a37c70077da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseDamage: 1

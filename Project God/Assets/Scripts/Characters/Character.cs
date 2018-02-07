@@ -9,18 +9,30 @@ public class Character : MonoBehaviour {
 
     [SerializeField] protected GameObject m_healthBar = null;
 
+    [SerializeField] protected GameObject m_deathEffect = null;
+
+    public GameObject m_characterModel = null;
+
+	protected Inventory m_inventory = null;
+
     // Use this for initialization
-    void Awake ()
+	protected virtual void Awake ()
     {
         m_health = m_healthMax;
     }
 
+	// Use this for initialization
+	void Start ()
+	{
+		m_inventory = GetComponent<Inventory> ();
+	}
+
     // Update is called once per frame
-    protected void Update ()
+    protected virtual void Update ()
     {
         //Check if dead
         if (IsDead())
-            Destroy(gameObject);
+            CharacterDeath();
     }
 
     protected bool IsDead()
@@ -44,5 +56,17 @@ public class Character : MonoBehaviour {
                 m_healthBar.transform.localScale = healthBarScale;
             }
         }
+    }
+
+    public virtual Vector3 GetAimingDir(Vector3 projectileSpawnPos)
+    {
+        return Vector3.zero;
+    }
+
+    public void CharacterDeath()
+    {
+        if (m_deathEffect != null)
+            Destroy(Instantiate(m_deathEffect, transform.position, Quaternion.identity),5.0f);
+        Destroy(gameObject);
     }
 }

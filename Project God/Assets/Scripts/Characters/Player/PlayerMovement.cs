@@ -60,9 +60,9 @@ public class PlayerMovement : MonoBehaviour {
         //Player rotation
         Vector3 aiming = InputManager.m_instance.GetAimingDirection(transform.position);
         if (aiming.x > 0)
-            m_scpPlayer.m_playerModel.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-        else
-            m_scpPlayer.m_playerModel.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+			m_scpPlayer.m_characterModel.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        else if(aiming.x < 0)
+            m_scpPlayer.m_characterModel.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
 
         //Left right
         Vector3 currentVelocity = m_rbPlayer.velocity;
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour {
             m_dashEnabled = false;
             m_dashOccuring = true;
             m_rbPlayer.useGravity = false;
-            m_rbPlayer.velocity = new Vector3(InputManager.m_instance.GetInputFloat("MovementHorizontal") * m_dashVelocity, 0.0f, 0.0f);
+			m_rbPlayer.velocity = new Vector3(InputManager.m_instance.GetInputFloatRaw("MovementHorizontal") * m_dashVelocity, 0.0f, 0.0f);
             Invoke("EndDash", m_dashTime);
         }
     }
@@ -142,10 +142,10 @@ public class PlayerMovement : MonoBehaviour {
 
         public float m_collisionDetectionRange;
 
-        public CollisionDir(float collisiondetectionRange)
+        public CollisionDir(float collisionDetectionRange)
         {
             m_right = m_left = m_up = m_down = false;
-            m_collisionDetectionRange = collisiondetectionRange;
+			m_collisionDetectionRange = collisionDetectionRange;
         }
     }
 
